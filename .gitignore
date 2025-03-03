@@ -275,3 +275,4 @@ redsky/media/
 .ipython/
 .env
 .envs/*
+.vscode/settings.json
