@@ -5,6 +5,7 @@ import ssl
 from pathlib import Path
 
 import environ
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # redsky/
@@ -29,15 +30,15 @@ TIME_ZONE = "UTC"
 LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#languages
 # from django.utils.translation import gettext_lazy as _
-# LANGUAGES = [
-#     ('en', _('English')),
-#     ('fr-fr', _('French')),
-#     ('pt-br', _('Portuguese')),
-# ]
+LANGUAGES = [
+    ("en", _("English")),
+    ("ar", _("Arabic")),
+]
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
+USE_L10n = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
@@ -102,7 +103,7 @@ WAGTAIL_APPS = [
 ]
 LOCAL_APPS = [
     "redsky.users",
-    # "redsky.site",
+    "redsky.home",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + WAGTAIL_APPS + LOCAL_APPS
@@ -384,6 +385,9 @@ WAGTAILDOCS_EXTENSIONS = [
     "txt",
     "xlsx",
 ]
+# Translations
+WAGTAIL_I18N_ENABLED = True
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES
 
 # Your stuff...
 # ------------------------------------------------------------------------------

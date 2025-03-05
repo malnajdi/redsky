@@ -6,6 +6,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
 from django.urls import path
 from django.views import defaults as default_views
+from django.conf.urls.i18n import i18n_patterns
 from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
@@ -15,7 +16,6 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
-    path("pages/", include(wagtail_urls)),
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     # Django Admin, use {% url 'admin:index' %}
@@ -23,11 +23,14 @@ urlpatterns = [
     # User management
     path("users/", include("redsky.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
-    # ...
-    # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
+
+urlpatterns += i18n_patterns(
+    path("", include(wagtail_urls)),
+    prefix_default_language=False,
+)
+
 if settings.DEBUG:
     # Static file serving when using Gunicorn + Uvicorn for local web socket development
     urlpatterns += staticfiles_urlpatterns()
