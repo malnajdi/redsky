@@ -1,0 +1,16 @@
+{
+  "name": "redsky",
+  "version": "0.0.1",
+  "description": "an amazing project",
+  "scripts": {
+    "tailwind": "npx @tailwindcss/cli -i ./redsky/static/css/input.css -o ./redsky/static/css/output.css --watch"
+  },
+  "author": "Mohammed Y. Alnajdi",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.10",
+    "@tailwindcss/postcss": "^4.0.10",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.10"
+  }
+}
