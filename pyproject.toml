@@ -134,4 +134,6 @@ extend-unsafe-fixes = [
 ]
 
 [tool.ruff.lint.isort]
+case-sensitive = false
 force-single-line = true
+lines-after-imports = 2

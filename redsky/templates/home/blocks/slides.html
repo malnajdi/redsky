@@ -3,11 +3,16 @@
 
 <div id="animation-carousel" class="relative w-full" data-carousel="static">
   <!-- Carousel wrapper -->
-  <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+  <div class="relative h-56 overflow-hidden rounded-lg md:h-120">
     {% for slide in value.slides %}
+    <p>{{ slide.block_type }}</p>
     <div class="hidden duration-200 ease-linear" data-carousel-item>
-      <h1>{{ slide.value.title }}</h1>
-      {{ slide.value.media }}
+      {% if slide.block_type == "image" %}
+      {% image slide.value format-webp as carouselimage %}
+      <img class="object-fill h-full w-full" src="{{ carouselimage.url }}" alt="{{ slide.value.title }}">
+      {% elif slide.block_type == "video" %}
+      <iframe class="object-fill h-full w-full" src="{{ slide.value }}"></iframe>
+      {% endif %}
     </div>
     {% endfor %}
   </div>

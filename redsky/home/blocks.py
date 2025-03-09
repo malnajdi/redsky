@@ -1,16 +1,5 @@
 from wagtail import blocks
-from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
-
-
-class SliderBlock(blocks.StructBlock):
-    title = blocks.CharBlock()
-    media = blocks.StreamBlock(
-        [
-            ("image", ImageChooserBlock()),
-            ("video", EmbedBlock()),
-        ],
-    )
 
 
 class ServiceBlock(blocks.StructBlock):
@@ -22,7 +11,8 @@ class ServiceBlock(blocks.StructBlock):
 class SlidersBlock(blocks.StructBlock):
     slides = blocks.StreamBlock(
         [
-            ("slide", SliderBlock()),
+            ("image", ImageChooserBlock(required=False)),
+            ("video", blocks.URLBlock(required=False)),
         ],
     )
 

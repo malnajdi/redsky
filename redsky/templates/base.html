@@ -30,14 +30,18 @@
 
 </head>
 
-<body class="{% block bodyclass %}{% endblock bodyclass %}">
+<body class="{% block bodyclass %}{% endblock bodyclass %} bg-gray-100">
   {% block header %}
+  {% include "header.html" %}
   {% endblock header %}
 
-  {% block body %}
-  {% endblock body %}
+  <div class="max-w-screen-xl items-center justify-between mx-auto p-4 bg-gray-200">
+    {% block body %}
+    {% endblock body %}
+  </div>
 
   {% block footer %}
+  {% include "footer.html" %}
   {% endblock footer %}
 
   {% block modal %}
