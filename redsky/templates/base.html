@@ -1,33 +1,45 @@
-{% load static i18n compress%}
+{# Remove wagtailuserbar: #}
+{% load static i18n compress wagtailcore_tags %}
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
 
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <title>
     {% block title %}
-    redsky
-    {% endblock title %}
+    {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+    {% endblock %}
+    {% block title_suffix %}
+    {% wagtail_site as current_site %}
+    {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+    {% endblock %}
   </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Behold My Awesome Project!" />
-  <meta name="author" content="Mohammed Y. Alnajdi" />
+  {% if page.search_description %}
+  <meta name="description" content="{{ page.search_description }}" />
+  {% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {# Force all links in the live preview panel to be opened in a new tab #}
+  {% if request.in_preview_panel %}
+  <base target="_blank">
+  {% endif %}
+
+  {# Add supported color schemes: #}
+  <meta name="color-scheme" content="light dark" />
+
+  {# Add a favicon with inline SVG: #}
   <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
+  {# Global stylesheets #}
   {% block css %}
   {% compress css %}
   <link href="{% static 'css/output.css' %}" rel="stylesheet" />
   {% endcompress %}
   {% endblock css %}
 
-  {% block javascript %}
-  <script defer src="{% static 'js/flowbite.min.js' %}"></script>
-  {% compress js %}
-  <script defer src="{% static 'js/main.js' %}"></script>
-  {% endcompress %}
-  {% endblock javascript %}
-
+  {% block extra_css %}
+  {# Override this in templates to add extra stylesheets #}
+  {% endblock %}
 </head>
 
 <body class="{% block bodyclass %}{% endblock bodyclass %} bg-gray-100">
@@ -46,8 +58,17 @@
 
   {% block modal %}
   {% endblock modal %}
-  {% block inline_javascript %}
-  {% endblock inline_javascript %}
+
+  {% block javascript %}
+  <script defer src="{% static 'js/flowbite.min.js' %}"></script>
+  {% compress js %}
+  <script defer src="{% static 'js/main.js' %}"></script>
+  {% endcompress %}
+  {% endblock javascript %}
+
+  {% block extra_js %}
+  {# Override this in templates to add extra javascript #}
+  {% endblock %}
 </body>
 
 </html>
