@@ -1,5 +1,5 @@
 from django import template
-from home.models import Navbar
+from home.models.snippets import Navbar
 
 
 register = template.Library()
