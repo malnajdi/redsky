@@ -7,6 +7,7 @@ from pathlib import Path
 import environ
 from django.utils.translation import gettext_lazy as _
 
+
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # redsky/
 APPS_DIR = BASE_DIR / "redsky"
@@ -91,6 +92,7 @@ THIRD_PARTY_APPS = [
 WAGTAIL_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.simple_translation",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -99,6 +101,7 @@ WAGTAIL_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
+    "wagtail.locales",
     "wagtail",
 ]
 LOCAL_APPS = [
@@ -388,6 +391,7 @@ WAGTAILDOCS_EXTENSIONS = [
 # Translations
 WAGTAIL_I18N_ENABLED = True
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES
+WAGTAILSIMPLETRANSLATION_SYNC_PAGE_TREE = True
 
 # Your stuff...
 # ------------------------------------------------------------------------------

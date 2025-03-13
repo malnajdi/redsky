@@ -14,6 +14,14 @@
           d="M1 1h15M1 7h15M1 13h15" />
       </svg>
     </button>
+    {% if page %}
+    {% for translation in page.get_translations.live %}
+    <a class="font-mono" href="{% pageurl translation %}" rel="alternate"
+      hreflang="{{ translation.locale.language_code }}">
+      {{ translation.locale.language_name_local }}
+    </a>
+    {% endfor %}
+    {% endif %}
     {% navbar_header %}
   </div>
   {% wagtailuserbar "bottom-right" %}
