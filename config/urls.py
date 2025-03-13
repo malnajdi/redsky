@@ -16,19 +16,21 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
-    path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
-    # User management
-    path("users/", include("redsky.users.urls", namespace="users")),
-    path("accounts/", include("allauth.urls")),
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
 
 urlpatterns += i18n_patterns(
+    # User management
+    path("users/", include("redsky.users.urls", namespace="users")),
+    path("accounts/", include("allauth.urls")),
+    # Wagtail
+    # path("search/", search_views.search, name="search"),
+    path("cms/", include(wagtailadmin_urls)),
     path("", include(wagtail_urls)),
-    prefix_default_language=False,
+    # prefix_default_language=False,
 )
 
 if settings.DEBUG:
